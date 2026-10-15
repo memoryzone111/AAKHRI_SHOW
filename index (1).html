@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aakhri Show – Farewell Ticket | NMAMIT Nitte</title>
+<meta name="description" content="Claim your farewell ticket for Aakhri Show – NMAMIT Nitte" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+  :root {
+    --teal-deep: #0a3634;
+    --teal: #1d7a71;
+    --teal-light: #5fd0c0;
+    --glass: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.28);
+    --gold: #e8c15a;
+    --text: #f4fffd;
+    --muted: #bfe8e1;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    color: var(--text);
+    background: radial-gradient(circle at 20% 10%, #2aa89a 0%, transparent 45%),
+                radial-gradient(circle at 85% 90%, #0f5c55 0%, transparent 50%),
+                linear-gradient(160deg, #0a3634 0%, #145f58 45%, #1d8a7e 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    overflow-x: hidden;
+  }
+
+  body::before, body::after {
+    content: "";
+    position: fixed;
+    width: 320px; height: 320px;
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    background: linear-gradient(135deg, rgba(95, 208, 192, 0.5), rgba(10, 54, 52, 0.1));
+    filter: blur(8px);
+    z-index: -1;
+    animation: float 14s ease-in-out infinite;
+  }
+  body::before { top: -80px; left: -90px; }
+  body::after { bottom: -100px; right: -80px; animation-delay: -6s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-24px) rotate(8deg); }
+  }
+
+  .container { width: 100%; max-width: 620px; }
+
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    padding: clamp(22px, 5vw, 36px);
+    animation: rise 0.6s ease both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .header { text-align: center; margin-bottom: 22px; }
+
+  .college {
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.2rem, 8vw, 3rem);
+    letter-spacing: 0.04em;
+    background: linear-gradient(120deg, #fff6cf, var(--gold), #fff, var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(232, 193, 90, 0.25);
+  }
+  h1.sm { font-size: 2rem; }
+
+  .tagline { color: var(--muted); margin-top: 6px; font-size: 0.98rem; }
+
+  .greeting { text-align: center; font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
+
+  .sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 22px;
+  }
+
+  .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .meta div {
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .meta strong { display: block; color: var(--text); font-size: 0.95rem; margin-top: 3px; }
+
+  .btn {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 16px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s;
+    font-family: inherit;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.7; cursor: wait; }
+  .btn-primary {
+    color: #3a2a00;
+    background: linear-gradient(120deg, #f9e39a, var(--gold), #f9e39a);
+    box-shadow: 0 10px 25px rgba(232, 193, 90, 0.35);
+  }
+  .btn-primary:hover { box-shadow: 0 14px 32px rgba(232, 193, 90, 0.5); }
+  .btn-ghost {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
+  }
+  .btn-ghost:hover { background: rgba(255, 255, 255, 0.16); }
+
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+
+  form { display: grid; gap: 16px; }
+  label { display: block; font-size: 0.88rem; color: var(--muted); margin-bottom: 6px; }
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input::placeholder { color: rgba(191, 232, 225, 0.5); }
+  input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(232, 193, 90, 0.2); }
+  input.invalid { border-color: #ff8a8a; box-shadow: 0 0 0 4px rgba(255, 138, 138, 0.2); }
+  .error { color: #ffb3b3; font-size: 0.85rem; min-height: 1.1em; }
+
+  .hidden { display: none !important; }
+
+  .ticket-wrap {
+    margin: 4px 0 18px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  }
+  canvas#ticket { width: 100%; height: auto; display: block; }
+
+  .success-msg { text-align: center; color: var(--muted); font-size: 0.92rem; margin-bottom: 16px; line-height: 1.5; }
+  .success-msg strong { color: var(--gold); }
+
+  .link-btn {
+    display: block;
+    margin: 18px auto 0;
+    background: none;
+    border: none;
+    color: var(--teal-light);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .footer { text-align: center; margin-top: 18px; font-size: 0.8rem; color: var(--muted); opacity: 0.8; }
+
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(58, 42, 0, 0.3);
+    border-top-color: #3a2a00;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: -2px;
+    margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 420px) {
+    .meta { grid-template-columns: 1fr; }
+    .btn-row { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, body::before, body::after { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main class="container">
+  <section class="glass" id="intro">
+    <div class="header">
+      <div class="college">NMAMIT · Nitte</div>
+      <h1 id="eventTitle">Aakhri Show</h1>
+      <p class="tagline" id="eventSub">Farewell Party</p>
+    </div>
+
+    <p class="greeting">Hello Seniors 👋</p>
+    <p class="sub">Please claim your ticket for our farewell. Enter your name and USN below, and your ticket will be ready to download as a PDF or JPG.</p>
+
+    <div class="meta">
+      <div>Date<strong id="metaDate">TBA</strong></div>
+      <div>Venue<strong id="metaVenue">TBA</strong></div>
+    </div>
+
+    <button class="btn btn-primary" id="startBtn">Claim My Ticket</button>
+  </section>
+
+  <section class="glass hidden" id="formSection">
+    <div class="header">
+      <h1 class="sm">Claim Your Ticket</h1>
+      <p class="tagline">Your USN will be your ticket number</p>
+    </div>
+
+    <form id="claimForm" novalidate>
+      <div>
+        <label for="name">Full Name</label>
+        <input id="name" type="text" placeholder="e.g. Rahul Kumar" autocomplete="name" maxlength="40" required />
+        <div class="error" id="nameError"></div>
+      </div>
+      <div>
+        <label for="usn">USN</label>
+        <input id="usn" type="text" placeholder="e.g. 4NM21CS001" autocomplete="off" maxlength="15" required style="text-transform: uppercase;" />
+        <div class="error" id="usnError"></div>
+      </div>
+      <button class="btn btn-primary" type="submit" id="submitBtn">Generate My Ticket</button>
+    </form>
+
+    <button class="link-btn" id="backToIntro">← Back</button>
+  </section>
+
+  <section class="glass hidden" id="ticketSection">
+    <div class="header">
+      <h1 class="sm">Your Ticket 🎟️</h1>
+    </div>
+
+    <p class="success-msg">Here's your ticket, <strong id="ticketName"></strong>. Show the QR code at the entrance and keep it safe.</p>
+
+    <div class="ticket-wrap">
+      <canvas id="ticket" width="1200" height="500"></canvas>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="jpgBtn">Download JPG</button>
+      <button class="btn btn-ghost" id="pdfBtn">Download PDF</button>
+    </div>
+
+    <button class="link-btn" id="editBtn">Edit details</button>
+  </section>
+
+  <p class="footer">Aakhri Show · Organised by NMAMIT, Nitte</p>
+</main>
+
+<script>
+  /* ============================================================
+     EDIT THESE DETAILS
+     ============================================================ */
+  const CONFIG = {
+    eventTitle: "Aakhri Show",
+    eventSub: "Farewell Party · Organised by NMAMIT, Nitte",
+    college: "NMAMIT NITTE",
+    date: "TBA",          // e.g. "25 Oct 2026"
+    time: "",             // e.g. "6:00 PM"
+    venue: "TBA",         // e.g. "Main Auditorium"
+    organiser: "Farewell for the Graduating Batch"
+  };
+  /* ============================================================ */
+
+  document.getElementById("eventTitle").textContent = CONFIG.eventTitle;
+  document.getElementById("eventSub").textContent = CONFIG.eventSub;
+  document.getElementById("metaDate").textContent = CONFIG.date;
+  document.getElementById("metaVenue").textContent = CONFIG.venue;
+
+  const $ = (id) => document.getElementById(id);
+  const show = (id) => $(id).classList.remove("hidden");
+  const hide = (id) => $(id).classList.add("hidden");
+
+  let currentTicket = null;
+
+  const saved = (() => {
+    try { return JSON.parse(localStorage.getItem("aakhriTicket")); } catch { return null; }
+  })();
+  if (saved && saved.name && saved.usn) {
+    $("name").value = saved.name;
+    $("usn").value = saved.usn;
+  }
+
+  $("startBtn").addEventListener("click", () => {
+    hide("intro");
+    show("formSection");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  $("backToIntro").addEventListener("click", () => {
+    hide("formSection");
+    show("intro");
+  });
+
+  $("editBtn").addEventListener("click", () => {
+    hide("ticketSection");
+    show("formSection");
+  });
+
+  $("usn").addEventListener("input", (e) => {
+    e.target.value = e.target.value.toUpperCase().replace(/\s/g, "");
+  });
+
+  function validate() {
+    const name = $("name").value.trim().replace(/\s+/g, " ");
+    const usn = $("usn").value.trim().toUpperCase();
+    let ok = true;
+
+    $("nameError").textContent = "";
+    $("usnError").textContent = "";
+    $("name").classList.remove("invalid");
+    $("usn").classList.remove("invalid");
+
+    if (name.length < 3 || !/^[A-Za-z .'-]+$/.test(name)) {
+      $("nameError").textContent = "Please enter your full name (letters only).";
+      $("name").classList.add("invalid");
+      ok = false;
+    }
+    if (!/^[A-Z0-9]{6,15}$/.test(usn)) {
+      $("usnError").textContent = "Please enter a valid USN (letters and numbers).";
+      $("usn").classList.add("invalid");
+      ok = false;
+    }
+    return ok ? { name, usn } : null;
+  }
+
+  $("claimForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = validate();
+    if (!data) return;
+
+    try { localStorage.setItem("aakhriTicket", JSON.stringify(data)); } catch {}
+    currentTicket = data;
+    $("ticketName").textContent = data.name;
+
+    $("submitBtn").disabled = true;
+    await drawTicket(data.name, data.usn);
+    $("submitBtn").disabled = false;
+
+    hide("formSection");
+    show("ticketSection");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* ============================================================
+     TICKET DRAWING
+     Canvas is 1200 x 500. Main panel: x 0 to 860. Stub: x 860 to 1200.
+     Every text line has its own fixed row (y) and a max width,
+     so nothing overlaps.
+     ============================================================ */
+  const W = 1200, H = 500, STUB_X = 860;
+  const INK = "#2a1d05";
+  const SERIF = "Georgia, 'Times New Roman', serif";
+  const SANS = "'Segoe UI', Arial, sans-serif";
+
+  // Ticket outline with semicircle notches on left and right
+  function ticketPath(ctx) {
+    const r = 30, c = 26;
+    ctx.beginPath();
+    ctx.moveTo(c, 0);
+    ctx.lineTo(W - c, 0);
+    ctx.quadraticCurveTo(W, 0, W, c);
+    ctx.lineTo(W, H / 2 - r);
+    ctx.arc(W, H / 2, r, -Math.PI / 2, Math.PI / 2, true);
+    ctx.lineTo(W, H - c);
+    ctx.quadraticCurveTo(W, H, W - c, H);
+    ctx.lineTo(c, H);
+    ctx.quadraticCurveTo(0, H, 0, H - c);
+    ctx.lineTo(0, H / 2 + r);
+    ctx.arc(0, H / 2, r, Math.PI / 2, -Math.PI / 2, true);
+    ctx.lineTo(0, c);
+    ctx.quadraticCurveTo(0, 0, c, 0);
+    ctx.closePath();
+  }
+
+  // Same texture for the same USN every time
+  function seededRandom(seedStr) {
+    let h = 1779033703 ^ seedStr.length;
+    for (let i = 0; i < seedStr.length; i++) {
+      h = Math.imul(h ^ seedStr.charCodeAt(i), 3432918353);
+      h = (h << 13) | (h >>> 19);
+    }
+    return function () {
+      h = Math.imul(h ^ (h >>> 16), 2246822507);
+      h = Math.imul(h ^ (h >>> 13), 3266489909);
+      h ^= h >>> 16;
+      return (h >>> 0) / 4294967296;
+    };
+  }
+
+  // Draw one centred line of text, shrinking it until it fits maxWidth
+  function drawLine(ctx, text, cx, y, maxWidth, maxPx, weight, family, color = INK) {
+    let size = maxPx;
+    ctx.font = `${weight} ${size}px ${family}`;
+    while (ctx.measureText(text).width > maxWidth && size > 10) {
+      size -= 1;
+      ctx.font = `${weight} ${size}px ${family}`;
+    }
+    ctx.fillStyle = color;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, cx, y);
+  }
+
+  // Thin rule with a small diamond in the middle
+  function rule(ctx, cx, y, half) {
+    ctx.save();
+    ctx.strokeStyle = INK;
+    ctx.fillStyle = INK;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx - half, y);
+    ctx.lineTo(cx - 14, y);
+    ctx.moveTo(cx + 14, y);
+    ctx.lineTo(cx + half, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(cx, y - 7);
+    ctx.lineTo(cx + 7, y);
+    ctx.lineTo(cx, y + 7);
+    ctx.lineTo(cx - 7, y);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function star(ctx, x, y, r) {
+    ctx.beginPath();
+    for (let i = 0; i < 10; i++) {
+      const rad = i % 2 === 0 ? r : r * 0.45;
+      const a = -Math.PI / 2 + (i * Math.PI) / 5;
+      ctx.lineTo(x + rad * Math.cos(a), y + rad * Math.sin(a));
+    }
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function makeQR(text) {
+    return new Promise((resolve) => {
+      if (typeof qrcode === "undefined") return resolve(null);
+      try {
+        const qr = qrcode(0, "M");
+        qr.addData(text);
+        qr.make();
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = qr.createDataURL(6, 2);
+      } catch {
+        resolve(null);
+      }
+    });
+  }
+
+  async function drawTicket(name, usn) {
+    const canvas = $("ticket");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, W, H);
+    const rnd = seededRandom(usn);
+
+    /* 1. Gold foil background */
+    ctx.save();
+    ticketPath(ctx);
+    ctx.clip();
+
+    const g = ctx.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0.0, "#7d5c17");
+    g.addColorStop(0.18, "#f7e08a");
+    g.addColorStop(0.38, "#b8902f");
+    g.addColorStop(0.58, "#f5d878");
+    g.addColorStop(0.78, "#a67f25");
+    g.addColorStop(1.0, "#e9c763");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    for (let i = 0; i < 260; i++) {
+      ctx.fillStyle = `rgba(255, 250, 220, ${0.02 + rnd() * 0.05})`;
+      ctx.fillRect(0, rnd() * H, W, 1 + rnd() * 2);
+    }
+
+    const sheen = ctx.createLinearGradient(0, 0, W, H * 0.6);
+    sheen.addColorStop(0.0, "rgba(255,255,255,0)");
+    sheen.addColorStop(0.42, "rgba(255,255,255,0.2)");
+    sheen.addColorStop(0.5, "rgba(255,255,255,0)");
+    ctx.fillStyle = sheen;
+    ctx.fillRect(0, 0, W, H);
+    ctx.restore();
+
+    /* 2. Borders */
+    ticketPath(ctx);
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 9;
+    ctx.stroke();
+
+    ctx.save();
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(36, 32, STUB_X - 36 - 26, H - 64);
+    ctx.restore();
+
+    /* 3. Perforated divider */
+    ctx.save();
+    ctx.setLineDash([8, 9]);
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(STUB_X, 40);
+    ctx.lineTo(STUB_X, H - 40);
+    ctx.stroke();
+    ctx.restore();
+
+    /* 4. MAIN PANEL (x 36 to 834, centre 435) */
+    const mc = 435;          // main panel centre x
+    const mw = 700;          // max text width in main panel
+
+    drawLine(ctx, CONFIG.college, mc, 72, mw, 22, "bold", SANS);
+    rule(ctx, mc, 102, 200);
+
+    ctx.fillStyle = INK;
+    [-1, 0, 1].forEach((d) => star(ctx, mc + d * 26, 130, 9));
+
+    drawLine(ctx, "TICKET", mc, 212, mw, 118, "bold", SERIF);
+    drawLine(ctx, CONFIG.eventTitle.toUpperCase(), mc, 292, mw, 40, "bold", SERIF);
+
+    drawLine(ctx, "ADMIT", mc, 332, mw, 18, "600", SANS);
+    drawLine(ctx, name.toUpperCase(), mc, 372, mw, 44, "bold", SERIF);
+
+    const info = [CONFIG.date, CONFIG.time, CONFIG.venue].filter(Boolean).join("   •   ");
+    drawLine(ctx, info, mc, 414, mw, 22, "600", SANS);
+    drawLine(ctx, CONFIG.organiser, mc, 448, mw, 18, "italic", SERIF);
+
+    /* 5. STUB (x 860 to 1200, centre 1030) */
+    const sc = 1030;
+    const sw = 300;
+
+    drawLine(ctx, "TICKET NO.", sc, 66, sw, 17, "bold", SANS);
+    drawLine(ctx, usn, sc, 102, sw, 30, "bold", SANS);
+
+    const qrSize = 150;
+    const qrX = sc - qrSize / 2;
+    const qrY = 124;
+    ctx.fillStyle = "#fff8dc";
+    ctx.fillRect(qrX - 8, qrY - 8, qrSize + 16, qrSize + 16);
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(qrX - 8, qrY - 8, qrSize + 16, qrSize + 16);
+
+    const qrImg = await makeQR(`AAKHRI-SHOW|${usn}|${name}`);
+    if (qrImg) {
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+    } else {
+      drawLine(ctx, "QR unavailable", sc, qrY + qrSize / 2, sw, 16, "normal", SANS);
+    }
+
+    drawLine(ctx, "ADMIT ONE", sc, 318, sw, 24, "bold", SANS);
+    drawLine(ctx, CONFIG.eventTitle.toUpperCase(), sc, 352, sw, 16, "600", SANS);
+    drawLine(ctx, CONFIG.date, sc, 378, sw, 16, "600", SANS);
+  }
+
+  function getImage() {
+    return $("ticket").toDataURL("image/jpeg", 0.95);
+  }
+
+  function fileBase() {
+    return "Aakhri-Show-Ticket-" + currentTicket.usn;
+  }
+
+  $("jpgBtn").addEventListener("click", () => {
+    const a = document.createElement("a");
+    a.href = getImage();
+    a.download = fileBase() + ".jpg";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+
+  $("pdfBtn").addEventListener("click", () => {
+    const btn = $("pdfBtn");
+    if (!window.jspdf) {
+      alert("PDF library could not load. Please check your internet connection or download the JPG.");
+      return;
+    }
+    const original = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner"></span>Preparing...';
+    btn.disabled = true;
+
+    try {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [W, H] });
+      pdf.addImage(getImage(), "JPEG", 0, 0, W, H);
+      pdf.save(fileBase() + ".pdf");
+    } finally {
+      btn.innerHTML = original;
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
